@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Connect - Lawyer Verification</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-balance-scale"></i>
+                <span>Legal Connect</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Verification Steps -->
+            <section class="verification-steps">
+                <h2>How to Verify a Lawyer</h2>
+                <div class="steps-container">
+                    <div class="step-card" data-step="1">
+                        <div class="step-number">1</div>
+                        <h3>Enter CNIC</h3>
+                        <p>Input the lawyer's 13-digit CNIC number in the correct format</p>
+                    </div>
+                    <div class="step-card" data-step="2">
+                        <div class="step-number">2</div>
+                        <h3>Enter Letter ID</h3>
+                        <p>Provide the unique Letter ID assigned to the lawyer</p>
+                    </div>
+                    <div class="step-card" data-step="3">
+                        <div class="step-number">3</div>
+                        <h3>Click Verify</h3>
+                        <p>Press the verify button to check credentials</p>
+                    </div>
+                    <div class="step-card" data-step="4">
+                        <div class="step-number">4</div>
+                        <h3>Review Results</h3>
+                        <p>Check the verification status and lawyer details</p>
+                    </div>
+                    <div class="step-card" data-step="5">
+                        <div class="step-number">5</div>
+                        <h3>Confirm Identity</h3>
+                        <p>Cross-reference with official documents if needed</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Verification Form -->
+            <section class="verification-form-section">
+                <div class="form-container">
+                    <h2>Verify Lawyer Credentials</h2>
+                    <form id="verificationForm" class="verification-form">
+                        <div class="form-group">
+                            <label for="cnic">CNIC Number</label>
+                            <input 
+                                type="text" 
+                                id="cnic" 
+                                name="cnic" 
+                                placeholder="12345-1234567-1"
+                                maxlength="15"
+                                aria-describedby="cnic-help"
+                            >
+                            <small id="cnic-help" class="form-help">Format: 12345-1234567-1</small>
+                            <div class="error-message" id="cnic-error"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="letterId">Letter ID</label>
+                            <input 
+                                type="text" 
+                                id="letterId" 
+                                name="letterId" 
+                                placeholder="LTR-12345"
+                                maxlength="9"
+                                aria-describedby="letter-help"
+                            >
+                            <small id="letter-help" class="form-help">Format: LTR-12345</small>
+                            <div class="error-message" id="letter-error"></div>
+                        </div>
+
+                        <button type="submit" class="verify-btn">
+                            <i class="fas fa-shield-alt"></i>
+                            Verify Lawyer
+                        </button>
+                    </form>
+
+                    <!-- Result Message -->
+                    <div id="resultMessage" class="result-message" role="alert" aria-live="polite"></div>
+                </div>
+
+                <!-- Verified Lawyers Sidebar -->
+                <div class="verified-lawyers-sidebar">
+                    <h3>Verified Lawyers on Our Platform</h3>
+                    <div class="lawyers-scroll-container">
+                        <div class="lawyers-list" id="lawyersList">
+                            <!-- Lawyers will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Floating Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-toggle" id="chatbotToggle" role="button" tabindex="0" aria-label="Open FAQ Chatbot">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div class="chatbot-panel" id="chatbotPanel">
+            <div class="chatbot-header">
+                <h3>FAQ Assistant</h3>
+                <button class="close-btn" id="closeChatbot" aria-label="Close FAQ">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-content">
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question" data-faq="1">
+                            What documents do I need for lawyer verification?
+                        </button>
+                        <div class="faq-answer" id="faq-1">
+                            <div class="chat-bubble">
+                                You need the lawyer's CNIC number and their unique Letter ID issued by the Bar Council. These are the primary credentials for verification.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question" data-faq="2">
+                            How accurate is the verification system?
+                        </button>
+                        <div class="faq-answer" id="faq-2">
+                            <div class="chat-bubble">
+                                Our verification system is directly connected to official Bar Council records, ensuring 99.9% accuracy in lawyer credential verification.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" data-faq="3">
+                            What if a lawyer is not found in the system?
+                        </button>
+                        <div class="faq-answer" id="faq-3">
+                            <div class="chat-bubble">
+                                If a lawyer is not found, they may not be registered with the Bar Council or their credentials might be incorrect. Please verify the information and try again.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" data-faq="4">
+                            Is my search information stored or tracked?
+                        </button>
+                        <div class="faq-answer" id="faq-4">
+                            <div class="chat-bubble">
+                                No, we do not store or track your search queries. All verifications are processed in real-time without saving personal data.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" data-faq="5">
+                            Can I verify multiple lawyers at once?
+                        </button>
+                        <div class="faq-answer" id="faq-5">
+                            <div class="chat-bubble">
+                                Currently, our system processes one verification at a time to ensure accuracy. Please verify each lawyer individually.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

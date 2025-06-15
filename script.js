@@ -261,22 +261,17 @@ function performVerification() {
     setTimeout(() => {
         // Search for lawyer in database
         const lawyer = lawyers.find(l => l.cnic === cnic && l.letterId === letterId);
-        
         if (lawyer) {
-            showResult(`✅ Verified: ${lawyer.fullName}`, 'success');
-            // Add pulse animation to verified lawyers list
-            highlightVerifiedLawyer(lawyer.fullName);
-            
-            // Change button to "Register as Lawyer" on successful verification
-            verifyBtn.innerHTML = '<i class="fas fa-user-plus"></i> Register as Lawyer';
-            verifyBtn.classList.add('register-mode');
-            verifyBtn.disabled = false;
-            
-            // Add click handler for registration
-            verifyBtn.onclick = function() {
-                handleLawyerRegistration(lawyer);
-            };
-        } else {
+        showResult(`✅ Verified: ${lawyer.fullName}. Redirecting to your dashboard...`, 'success');
+        highlightVerifiedLawyer(lawyer.fullName);
+        verifyBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting...';
+        verifyBtn.disabled = true;
+        setTimeout(() => {
+            window.location.href = 'https://261947251.wixsite.com/legal-connect/copy-of-sign-up-as-lawyer';
+        }, 2500);
+}
+
+         else {
             // Check if CNIC exists with different Letter ID
             const cnicExists = lawyers.find(l => l.cnic === cnic);
             // Check if Letter ID exists with different CNIC
